@@ -1,32 +1,26 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
+import { getPokemonImageById } from "./api/getPokemonImageById";
 
 export default function App() {
-    const [image, setImage] = useState(null);
+    const ids = [1, 4, 7, 10, 16, 19, 25, 77, 130, 133, 143, 150];
+    const [images, setImages] = useState([]);
 
     useEffect(() => {
-        async function getPokemonImage(id) {
-            try {
-                const pokemon = await fetch("https://pokeapi.co/api/v2/pokemon/25");
+        let cancelled = false;
 
-                if (!pokemon.ok)
-                    throw new Error("Error HTTP: ", pokemon.status);
+        Promise.all(ids.map(id => getPokemonImageById(id)))
+            .then(urls => {
+                if (!cancelled) setImages(urls);
+            });
 
-                const pokemonData = await pokemon.json();
-                setImage(pokemonData.sprites.front_default);
-            } catch (error) {
-                console.error("Error: ", error);
-            }
-        }
-
-        getPokemonImage(25);
+        return () => { cancelled = true; };
     }, []);
  
     return (
         <>
-            {image
-             ? <img src={image} alt="Pikachu" />
-             : <p>Loading ...</p>
-            }
+            {images.map((image, index) => (
+                <img key={ids[index]} src={image} alt="Pokemon" />
+            ))}
         </>
     )
 }
