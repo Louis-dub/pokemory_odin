@@ -11,7 +11,7 @@ export default function Header() {
                 />
                 <h1>PokéMory</h1>
             </div>
-            <button className="bg-blue-200 text-black p-1 rounded-[5px] border border-black hover:scale-110 active:scale-95 transition-all ease-out">
+            <button className="absolute left-1/2 -translate-x-1/2 bg-blue-200 text-black p-1 rounded-[5px] border border-black hover:scale-110 active:scale-95 transition-all ease-out">
                 New Game
             </button>
             <div className="flex justify-center gap-8">

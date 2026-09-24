@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { getPokemonImageById } from "./api/getPokemonImageById";
 import Header from "./components/header";
+import Game from "./components/game";
 
 export default function App() {
     const ids = [1, 4, 7, 10, 16, 19, 25, 77, 130, 133, 143, 150];
@@ -35,12 +36,8 @@ export default function App() {
             <div>
                 <Header />
             </div>
-            <div>
-                <div className="w-[600px] flex flex-wrap border rounded-[5px] justify-center">
-                    {images.map(image => (
-                        <img key={image.id} src={image.url} alt="Pokemon" />
-                    ))}
-                </div>
+            <div className="mt-16">
+                <Game images={images} />
             </div>
         </>
     )
