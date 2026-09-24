@@ -8,6 +8,7 @@ export default function App() {
     const [ids, setIds] = useState([]);
     const [images, setImages] = useState([]);
     const [score, setScore] = useState(0);
+    const [record, setRecord] = useState(localStorage.getItem("record") || 0);
 
     useEffect(() => {
         let cancelled = false;
@@ -40,6 +41,7 @@ export default function App() {
                     score={score}
                     setScore={setScore}
                     setIds={setIds}
+                    record={record}
                 />
             </div>
             <div className="mt-16">
@@ -50,6 +52,8 @@ export default function App() {
                     setScore={setScore}
                     ids={ids}
                     setIds={setIds}
+                    record={record}
+                    setRecord={setRecord}
                 />
             </div>
         </>

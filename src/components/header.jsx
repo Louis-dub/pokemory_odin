@@ -1,6 +1,6 @@
 import Logo from '../assets/logo.png';
 
-export default function Header({ score, setScore, setIds }) {
+export default function Header({ score, setScore, setIds, record }) {
     function handleClick() {
         setScore(0);
         setIds([]);
@@ -24,7 +24,7 @@ export default function Header({ score, setScore, setIds }) {
             </button>
             <div className="flex justify-center gap-8">
                 <span>Score : {score}</span>
-                <span>Record : 0</span>
+                <span>Record : {record}</span>
             </div>
         </div>
     );

@@ -1,7 +1,8 @@
 export default function Game({
     images, setImages,
     score, setScore,
-    ids, setIds
+    ids, setIds,
+    record, setRecord
 }) {
     function handleClick(id) {
         const tempImages = [...images];
@@ -10,8 +11,15 @@ export default function Game({
         if (!ids.includes(id)) {
             const tempIds = [...ids];
             tempIds.push(id);
+            if (score + 1 > record) {
+                setRecord(score + 1);
+                localStorage.setItem("record", JSON.stringify(score + 1));
+            }
             setScore(score + 1);
             setIds(tempIds);
+        } else {
+            setScore(0);
+            setIds([]);
         }
     }
 
