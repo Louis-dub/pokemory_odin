@@ -37,7 +37,7 @@ export default function App() {
                 <Header />
             </div>
             <div className="mt-16">
-                <Game images={images} />
+                <Game images={images} setImages={setImages} />
             </div>
         </>
     )
