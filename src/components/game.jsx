@@ -1,8 +1,18 @@
-export default function Game({ images, setImages }) {
-    function handleClick() {
+export default function Game({
+    images, setImages,
+    score, setScore,
+    ids, setIds
+}) {
+    function handleClick(id) {
         const tempImages = [...images];
         tempImages.sort(() => Math.random() - 0.5);
         setImages(tempImages);
+        if (!ids.includes(id)) {
+            const tempIds = [...ids];
+            tempIds.push(id);
+            setScore(score + 1);
+            setIds(tempIds);
+        }
     }
 
     return (
@@ -11,7 +21,7 @@ export default function Game({ images, setImages }) {
                 <div
                     key={img.id}
                     className="border border-black border-2 p-2 hover:scale-110 active:scale-95 transition-all ease-out w-32 cursor-pointer"
-                    onClick={handleClick}
+                    onClick={() => handleClick(img.id)}
                 >
                     <img
                         src={img.url}

@@ -4,14 +4,16 @@ import Header from "./components/header";
 import Game from "./components/game";
 
 export default function App() {
-    const ids = [1, 4, 7, 10, 16, 19, 25, 77, 130, 133, 143, 150];
+    const allIds = [1, 4, 7, 10, 16, 19, 25, 77, 130, 133, 143, 150];
+    const [ids, setIds] = useState([]);
     const [images, setImages] = useState([]);
+    const [score, setScore] = useState(0);
 
     useEffect(() => {
         let cancelled = false;
         const loadImages = async () => {
             try {
-                const urls = await Promise.all(ids.map(id => getPokemonImageById(id)));
+                const urls = await Promise.all(allIds.map(id => getPokemonImageById(id)));
                 if (!cancelled) {
                     const imgs = urls.map((url, id) =>({
                         id: id,
@@ -34,10 +36,21 @@ export default function App() {
     return (
         <>
             <div>
-                <Header />
+                <Header
+                    score={score}
+                    setScore={setScore}
+                    setIds={setIds}
+                />
             </div>
             <div className="mt-16">
-                <Game images={images} setImages={setImages} />
+                <Game
+                    images={images}
+                    setImages={setImages}
+                    score={score}
+                    setScore={setScore}
+                    ids={ids}
+                    setIds={setIds}
+                />
             </div>
         </>
     )
